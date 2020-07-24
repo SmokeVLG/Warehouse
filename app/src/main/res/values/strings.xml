@@ -1,3 +1,17 @@
 <resources>
-    <string name="app_name">Warehouse</string>
-</resources>
+    <string name="app_name">Склад</string>
+
+    <string name="update_data">Обновить данные</string>
+    <string name="add">Добавить</string>
+    <string name="product_name">Наименование товара</string>
+    <string name="path_to_image">Путь к изображению.</string>
+    <string name="insert_data">Добавить</string>
+    <string name="cancel">Отмена</string>
+    <string name="add_update_product_details">Добавить/Изменить данные о товаре</string>
+    <string name="coast">Цена товара</string>
+    <string name="deleted_success">Товар полностью удален.</string>
+    <string name="something_went_wrong">Что-то пошло не так!</string>
+    <string name="enter_name">Пожалуйста введите имя</string>
+    <string name="enter_coast">Пожалуйста введите стоимость</string>
+    <string name="enter_path_to_image">Пожалуйста введите путь к изображению</string>
+ </resources>
