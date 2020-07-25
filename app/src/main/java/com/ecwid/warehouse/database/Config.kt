@@ -3,7 +3,6 @@ package com.ecwid.warehouse.database
 object Config {
 
     val DATABASE_NAME = "warehousedb"
-
     val TABLE_WAREHOUSE = "warehouse"
     val COLUMN_WAREHOUSE_ID = "_id"
     val COLUMN_WAREHOUSE_NAME = "name"

@@ -21,29 +21,27 @@
             app:layout_constraintStart_toStartOf="parent"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/five_dp"
-            android:background="@color/white"
-            android:layout_below="@+id/tvAddUpdateLabel">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvAddUpdateLabel"
+        android:layout_margin="@dimen/five_dp"
+        android:background="@color/white">
 
         <EditText
-                android:id="@+id/etName"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                android:hint="@string/product_name"
-                android:textSize="@dimen/fifteen_sp"
-                android:textColor="@color/black"
-                android:background="@drawable/square"
-                android:padding="@dimen/five_dp"
-                android:layout_marginTop="@dimen/five_dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                android:importantForAutofill="no"
-                tools:targetApi="o"/>
+            android:id="@+id/etName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/five_dp"
+            android:background="@drawable/square"
+            android:hint="@string/product_name"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:padding="@dimen/five_dp"
+            android:textColor="@color/black"
+            android:textSize="@dimen/fifteen_sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:targetApi="o" />
 
 
 
@@ -80,33 +78,51 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/etPathToImage"
             android:importantForAutofill="no"
-            tools:targetApi="o"/>
+            tools:targetApi="o" />
 
-        <Button
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            app:layout_constraintTop_toBottomOf="@+id/etCoast">
+
+
+            <Button
                 android:id="@+id/btnInsertData"
+
+                android:layout_height="wrap_content"
+
+                android:layout_width="0dp"
+                android:layout_weight="33"
+                android:text="@string/insert_data"
+                android:textColor="@color/white"
+                android:theme="@style/CustomButtonTheme"
+                app:layout_constraintTop_toBottomOf="@+id/etCoast" />
+
+            <Button
+                android:id="@+id/btnDeleteData"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@string/insert_data"
-                android:layout_marginStart="8dp"
-                android:theme="@style/CustomButtonTheme"
-                android:textColor="@color/white"
-                app:layout_constraintTop_toBottomOf="@+id/etCoast"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintEnd_toStartOf="@+id/btnCancel"/>
+                android:layout_weight="33"
 
-        <Button
+                android:text="@string/delete_data"
+                android:textColor="@color/white"
+                android:theme="@style/CustomButtonTheme"
+                app:layout_constraintTop_toBottomOf="@+id/etCoast" />
+
+            <Button
                 android:id="@+id/btnCancel"
                 android:layout_width="0dp"
+                android:layout_weight="33"
                 android:layout_height="wrap_content"
+
                 android:text="@string/cancel"
-                android:theme="@style/CustomButtonTheme"
                 android:textColor="@color/white"
-                android:layout_marginEnd="8dp"
+                android:theme="@style/CustomButtonTheme"
                 app:layout_constraintTop_toBottomOf="@+id/etCoast"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/btnInsertData"
-                app:layout_constraintHorizontal_bias="0.5"/>
+                tools:layout_editor_absoluteX="304dp" />
+
+        </LinearLayout>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

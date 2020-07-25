@@ -10,10 +10,10 @@ import android.view.Window
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.ecwid.warehouse.model.Product
 import com.ecwid.warehouse.adapter.WarehouseListAdapter
 import com.ecwid.warehouse.database.DatabaseQueryClass
 import com.ecwid.warehouse.listener.OnItemClickListener
+import com.ecwid.warehouse.model.Product
 import com.ecwid.warehouse.utils.toast
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.custom_toolbar.*
@@ -122,24 +122,24 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
     }
 
 
-    override fun onEditClicked(pos: Int, student: Product) {
-        onUpdateData(pos, student.id)
+    override fun onEditClicked(pos: Int, product: Product) {
+        onUpdateData(pos, product.id)
     }
 
     private fun onUpdateData(pos: Int, registrationNumber: Long) {
 
-        val mStudent = databaseQueryClass.getProductById(registrationNumber)
+        val product = databaseQueryClass.getProductById(registrationNumber)
 
-        if (mStudent != null) {
+        if (product != null) {
             val dialog = Dialog(this)
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
             dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
             dialog.setContentView(R.layout.dialog_add_product)
-            dialog.btnInsertData.text = getString(R.string.update_data)
-            dialog.etName.setText(mStudent.name)
-            dialog.etCoast.setText(mStudent.coast)
-            dialog.etPathToImage.setText(mStudent.pathToImage)
+
+            dialog.etName.setText(product.name)
+            dialog.etCoast.setText(product.coast)
+            dialog.etPathToImage.setText(product.pathToImage)
 
             dialog.show()
 
@@ -150,14 +150,14 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
 
 
                 if (checkValidation(nameString, coast, pathToImageString)) {
-                    mStudent.name = nameString
-                    mStudent.pathToImage = pathToImageString
-                    mStudent.coast = coast
+                    product.name = nameString
+                    product.pathToImage = pathToImageString
+                    product.coast = coast
 
-                    val id = databaseQueryClass.updateProductInfo(mStudent)
+                    val id = databaseQueryClass.updateProductInfo(product)
 
                     if (id > 0) {
-                        mAdapter.update(pos, mStudent)
+                        mAdapter.update(pos, product)
                         dialog.dismiss()
 
                     }
@@ -167,11 +167,16 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
                 dialog.dismiss()
             }
 
+            dialog.btnDeleteData.setOnClickListener {
+                this.onDeleteClicked(pos, product)
+                dialog.dismiss()
+            }
+
         }
     }
 
-    override fun onDeleteClicked(adapterPosition: Int, studentBean: Product) {
-        val count = databaseQueryClass.deleteProductById(studentBean.id)
+    override fun onDeleteClicked(adapterPosition: Int, productBean: Product) {
+        val count = databaseQueryClass.deleteProductById(productBean.id)
 
         if (count > 0) {
             mAdapter.removeAt(adapterPosition)

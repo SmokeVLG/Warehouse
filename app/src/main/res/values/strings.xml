@@ -6,6 +6,7 @@
     <string name="product_name">Наименование товара</string>
     <string name="path_to_image">Путь к изображению.</string>
     <string name="insert_data">Добавить</string>
+    <string name="delete_data">Удалить</string>
     <string name="cancel">Отмена</string>
     <string name="add_update_product_details">Добавить/Изменить данные о товаре</string>
     <string name="coast">Цена товара</string>

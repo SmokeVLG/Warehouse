@@ -4,7 +4,6 @@ import com.ecwid.warehouse.model.Product
 
 
 interface OnItemClickListener {
-    fun onEditClicked(pos: Int, student: Product)
-
-    fun onDeleteClicked(adapterPosition: Int, studentBean: Product)
+    fun onEditClicked(pos: Int, product: Product)
+    fun onDeleteClicked(adapterPosition: Int, productBean: Product)
 }

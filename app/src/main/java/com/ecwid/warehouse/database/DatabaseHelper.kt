@@ -13,7 +13,6 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
                 + Config.COLUMN_WAREHOUSE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + Config.COLUMN_WAREHOUSE_NAME + " TEXT NOT NULL, "
                 + Config.COLUMN_WAREHOUSE_PATH_TO_IMAGE + " TEXT, " //nullable
-
                 + Config.COLUMN_WAREHOUSE_COAST + " TEXT "
                 + ")")
 

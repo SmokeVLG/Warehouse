@@ -48,19 +48,18 @@ class WarehouseListAdapter(
         holder.bind(mArrayList[position])
     }
 
-    inner class ViewHolder(var view: View) : RecyclerView.ViewHolder(view) {
+    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         fun bind(productBean: Product) {
             itemView.tvName.text = productBean.name
 
             itemView.tvPathToImage.text = productBean.pathToImage
             itemView.tvProductCoast.text = productBean.coast
 
-            itemView.ivDelete.setOnClickListener {
-                onItemClickListener.onDeleteClicked(adapterPosition, productBean)
-            }
-
-            itemView.ivEdit.setOnClickListener {
-                onItemClickListener.onEditClicked(adapterPosition, productBean)
+            itemView.cvProduct.setOnClickListener {
+                onItemClickListener.onEditClicked(
+                    adapterPosition,
+                    productBean
+                )
             }
         }
     }
