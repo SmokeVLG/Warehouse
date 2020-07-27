@@ -1,8 +1,11 @@
 package com.ecwid.warehouse
 
+import android.app.Activity
 import android.app.Dialog
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -22,14 +25,21 @@ import kotlinx.android.synthetic.main.dialog_add_product.*
 class MainActivity : AppCompatActivity(), OnItemClickListener {
 
 
+    private val PICK_IMAGE = 1;
+
     private val mAdapter by lazy {
         WarehouseListAdapter(this, this)
     }
     private val databaseQueryClass = DatabaseQueryClass(this)
 
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+
 
         setSupportActionBar(toolbar)
 
@@ -63,12 +73,23 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
         dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
         dialog.setContentView(R.layout.dialog_add_product)
+        dialog.imageView.setImageResource(R.drawable.ic_shopping_cart)
+
+        dialog.imageView.setOnClickListener {
+            val intent = Intent()
+            intent.type = "image/*"
+            intent.action = Intent.ACTION_GET_CONTENT
+            startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE)
+        }
+
 
         dialog.show()
         dialog.btnInsertData.setOnClickListener {
             val nameString = dialog.etName.text.toString()
             val coast = dialog.etCoast.text.toString()
-            val pathToImageString = dialog.etPathToImage.text.toString()
+            // val pathToImageString = dialog.etPathToImage.text.toString()
+            val pathToImageString = ""
+
 
 
             if (checkValidation(nameString, coast, pathToImageString)) {
@@ -139,14 +160,15 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
 
             dialog.etName.setText(product.name)
             dialog.etCoast.setText(product.coast)
-            dialog.etPathToImage.setText(product.pathToImage)
+            // dialog.etPathToImage.setText(product.pathToImage)
 
             dialog.show()
 
             dialog.btnInsertData.setOnClickListener {
                 val nameString = dialog.etName.text.toString()
                 val coast = dialog.etCoast.text.toString()
-                val pathToImageString = dialog.etPathToImage.text.toString()
+                //val pathToImageString = dialog.etPathToImage.text.toString()
+                val pathToImageString = ""
 
 
                 if (checkValidation(nameString, coast, pathToImageString)) {

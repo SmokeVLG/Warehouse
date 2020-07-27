@@ -6,5 +6,5 @@
 
     <dimen name="five_sp">5sp</dimen>
     <dimen name="ten_sp">10sp</dimen>
-    <dimen name="fifteen_sp">15sp</dimen>
+    <dimen name="fifteen_sp">20sp</dimen>
 </resources>

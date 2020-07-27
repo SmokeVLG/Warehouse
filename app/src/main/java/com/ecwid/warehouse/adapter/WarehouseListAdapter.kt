@@ -52,9 +52,9 @@ class WarehouseListAdapter(
         fun bind(productBean: Product) {
             itemView.tvName.text = productBean.name
 
-            itemView.tvPathToImage.text = productBean.pathToImage
+            //itemView.tvPathToImage.text = productBean.pathToImage
             itemView.tvProductCoast.text = productBean.coast
-
+            itemView.imageView.setImageResource(R.drawable.ic_shopping_cart)
             itemView.cvProduct.setOnClickListener {
                 onItemClickListener.onEditClicked(
                     adapterPosition,
