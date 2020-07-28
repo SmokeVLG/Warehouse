@@ -1,6 +1,8 @@
 package com.ecwid.warehouse.adapter
 
 import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,14 +26,8 @@ class WarehouseListAdapter(
         notifyDataSetChanged()
     }
 
-    fun update(pos: Int, studentBean: Product) {
-        this.mArrayList[pos] = studentBean
-        notifyItemChanged(pos)
-    }
-
     fun removeAt(pos: Int) {
         this.mArrayList.removeAt(pos)
-
         notifyDataSetChanged()
     }
 
@@ -52,9 +48,19 @@ class WarehouseListAdapter(
         fun bind(productBean: Product) {
             itemView.tvName.text = productBean.name
 
-            //itemView.tvPathToImage.text = productBean.pathToImage
             itemView.tvProductCoast.text = productBean.coast
-            itemView.imageView.setImageResource(R.drawable.ic_shopping_cart)
+
+            val pathToImage: ByteArray = productBean.pathToImage;
+            val bmp: Bitmap
+            if (pathToImage.isNotEmpty()) {
+
+                bmp = BitmapFactory.decodeByteArray(pathToImage, 0, pathToImage.size)
+                itemView.imageView.setImageBitmap(bmp)
+            }
+
+            itemView.imageView.setImageURI(null);
+
+
             itemView.cvProduct.setOnClickListener {
                 onItemClickListener.onEditClicked(
                     adapterPosition,

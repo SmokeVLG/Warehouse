@@ -1,15 +1,9 @@
 package com.ecwid.warehouse
 
-import android.app.Activity
-import android.app.Dialog
 import android.content.Intent
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
-import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.view.Window
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,23 +11,17 @@ import com.ecwid.warehouse.adapter.WarehouseListAdapter
 import com.ecwid.warehouse.database.DatabaseQueryClass
 import com.ecwid.warehouse.listener.OnItemClickListener
 import com.ecwid.warehouse.model.Product
-import com.ecwid.warehouse.utils.toast
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.custom_toolbar.*
-import kotlinx.android.synthetic.main.dialog_add_product.*
 
 class MainActivity : AppCompatActivity(), OnItemClickListener {
 
 
-    private val PICK_IMAGE = 1;
+    private val databaseQueryClass = DatabaseQueryClass(this)
 
     private val mAdapter by lazy {
         WarehouseListAdapter(this, this)
     }
-    private val databaseQueryClass = DatabaseQueryClass(this)
-
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,82 +48,19 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.action_add -> {
-                openDialog()
+                //openDialog()
+                try {
+                    val intent = Intent(this, AddProductActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    this.startActivity(intent)
+
+                } catch (e: Exception) {
+                    // Nothing to do
+                }
             }
             else -> super.onOptionsItemSelected(item)
         }
         return super.onOptionsItemSelected(item)
-    }
-
-    private fun openDialog() {
-        val dialog = Dialog(this)
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-
-        dialog.setContentView(R.layout.dialog_add_product)
-        dialog.imageView.setImageResource(R.drawable.ic_shopping_cart)
-
-        dialog.imageView.setOnClickListener {
-            val intent = Intent()
-            intent.type = "image/*"
-            intent.action = Intent.ACTION_GET_CONTENT
-            startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE)
-        }
-
-
-        dialog.show()
-        dialog.btnInsertData.setOnClickListener {
-            val nameString = dialog.etName.text.toString()
-            val coast = dialog.etCoast.text.toString()
-            // val pathToImageString = dialog.etPathToImage.text.toString()
-            val pathToImageString = ""
-
-
-
-            if (checkValidation(nameString, coast, pathToImageString)) {
-                val product =
-                    Product(-1, nameString, pathToImageString, coast)
-
-                val databaseQueryClass = DatabaseQueryClass(this)
-
-                val id = databaseQueryClass.insertProduct(product)
-
-                if (id > 0) {
-                    product.id = id
-                    getData()
-                    dialog.dismiss()
-                }
-            }
-        }
-        dialog.btnCancel.setOnClickListener {
-            dialog.dismiss()
-        }
-    }
-
-    private fun checkValidation(
-        nameString: String,
-        coast: String,
-        pathToImage: String
-    ): Boolean {
-        return when {
-            nameString.isEmpty() -> {
-                toast(this, getString(R.string.enter_name))
-                false
-            }
-            coast.isEmpty() -> {
-                toast(this, getString(R.string.enter_coast))
-                false
-            }
-            pathToImage.isEmpty() -> {
-                toast(this, getString(R.string.enter_path_to_image))
-                false
-            }
-
-
-            else -> {
-                true
-            }
-        }
     }
 
     private fun getData() {
@@ -143,59 +68,16 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
     }
 
 
+
+
+
+
+
     override fun onEditClicked(pos: Int, product: Product) {
-        onUpdateData(pos, product.id)
+       // TODO("Not yet implemented")
+           // var i = 0;
     }
 
-    private fun onUpdateData(pos: Int, registrationNumber: Long) {
-
-        val product = databaseQueryClass.getProductById(registrationNumber)
-
-        if (product != null) {
-            val dialog = Dialog(this)
-            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-            dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-
-            dialog.setContentView(R.layout.dialog_add_product)
-
-            dialog.etName.setText(product.name)
-            dialog.etCoast.setText(product.coast)
-            // dialog.etPathToImage.setText(product.pathToImage)
-
-            dialog.show()
-
-            dialog.btnInsertData.setOnClickListener {
-                val nameString = dialog.etName.text.toString()
-                val coast = dialog.etCoast.text.toString()
-                //val pathToImageString = dialog.etPathToImage.text.toString()
-                val pathToImageString = ""
-
-
-                if (checkValidation(nameString, coast, pathToImageString)) {
-                    product.name = nameString
-                    product.pathToImage = pathToImageString
-                    product.coast = coast
-
-                    val id = databaseQueryClass.updateProductInfo(product)
-
-                    if (id > 0) {
-                        mAdapter.update(pos, product)
-                        dialog.dismiss()
-
-                    }
-                }
-            }
-            dialog.btnCancel.setOnClickListener {
-                dialog.dismiss()
-            }
-
-            dialog.btnDeleteData.setOnClickListener {
-                this.onDeleteClicked(pos, product)
-                dialog.dismiss()
-            }
-
-        }
-    }
 
     override fun onDeleteClicked(adapterPosition: Int, productBean: Product) {
         val count = databaseQueryClass.deleteProductById(productBean.id)
@@ -207,4 +89,6 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
         } else
             Toast.makeText(this, getString(R.string.something_went_wrong), Toast.LENGTH_LONG).show()
     }
+
+
 }

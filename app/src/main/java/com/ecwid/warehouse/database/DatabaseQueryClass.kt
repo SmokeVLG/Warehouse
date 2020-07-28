@@ -31,7 +31,7 @@ class DatabaseQueryClass(private val context: Context) {
                         do {
                             val id = cursor.getInt(cursor.getColumnIndex(Config.COLUMN_WAREHOUSE_ID))
                             val name = cursor.getString(cursor.getColumnIndex(Config.COLUMN_WAREHOUSE_NAME))
-                            val pathToImage = cursor.getString(cursor.getColumnIndex(Config.COLUMN_WAREHOUSE_PATH_TO_IMAGE))
+                            val pathToImage = cursor.getBlob(cursor.getColumnIndex(Config.COLUMN_WAREHOUSE_PATH_TO_IMAGE))
                             val coast = cursor.getString(cursor.getColumnIndex(Config.COLUMN_WAREHOUSE_COAST))
 
                             productList.add(Product(id, name, pathToImage, coast))
@@ -90,7 +90,7 @@ class DatabaseQueryClass(private val context: Context) {
             if (cursor!!.moveToFirst()) {
                 val id = cursor.getInt(cursor.getColumnIndex(Config.COLUMN_WAREHOUSE_ID))
                 val name = cursor.getString(cursor.getColumnIndex(Config.COLUMN_WAREHOUSE_NAME))
-                val pathToImage = cursor.getString(cursor.getColumnIndex(Config.COLUMN_WAREHOUSE_PATH_TO_IMAGE))
+                val pathToImage = cursor.getBlob(cursor.getColumnIndex(Config.COLUMN_WAREHOUSE_PATH_TO_IMAGE))
 
                 val coast = cursor.getString(cursor.getColumnIndex(Config.COLUMN_WAREHOUSE_COAST))
 
