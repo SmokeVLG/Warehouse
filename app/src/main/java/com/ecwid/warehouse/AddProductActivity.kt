@@ -25,7 +25,7 @@ class AddProductActivity : AppCompatActivity() {
             val uri = data?.data
             val iStream: InputStream? = contentResolver.openInputStream(uri!!)
             byteArray = this.getBytes(iStream!!)!!
-            imageView.setImageURI(uri)
+            image.setImageURI(uri)
         }
 
     }
@@ -46,9 +46,9 @@ class AddProductActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_product)
 
-        imageView.setImageResource(R.drawable.ic_shopping_cart)
+        image.setImageResource(R.drawable.ic_shopping_cart)
 
-        imageView.setOnClickListener {
+        image.setOnClickListener {
             val intent = Intent()
             intent.type = "image/*"
             intent.action = Intent.ACTION_GET_CONTENT

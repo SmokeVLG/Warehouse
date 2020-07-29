@@ -46,19 +46,19 @@ class WarehouseListAdapter(
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         fun bind(productBean: Product) {
-            itemView.tvName.text = productBean.name
+            itemView.product_name.text = productBean.name
 
-            itemView.tvProductCoast.text = productBean.coast
+            itemView.product_coast.text = productBean.coast
 
             val pathToImage: ByteArray = productBean.pathToImage;
             val bmp: Bitmap
             if (pathToImage.isNotEmpty()) {
 
                 bmp = BitmapFactory.decodeByteArray(pathToImage, 0, pathToImage.size)
-                itemView.imageView.setImageBitmap(bmp)
+                itemView.image.setImageBitmap(bmp)
             }
 
-            itemView.imageView.setImageURI(null);
+            itemView.image.setImageURI(null);
 
 
             itemView.cvProduct.setOnClickListener {
