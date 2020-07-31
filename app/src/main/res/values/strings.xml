@@ -15,4 +15,6 @@
     <string name="enter_name">Пожалуйста введите имя</string>
     <string name="enter_coast">Пожалуйста введите стоимость</string>
     <string name="enter_path_to_image">Пожалуйста введите путь к изображению</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
