@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.ecwid.warehouse.model.repository.ProductRepository
 import com.ecwid.warehouse.utils.LoadingState
 
-class ProductViewModel(productRepository: ProductRepository) : ViewModel() {
+class ProductsViewModel(productRepository: ProductRepository) : ViewModel() {
 
     val data = productRepository.data
 

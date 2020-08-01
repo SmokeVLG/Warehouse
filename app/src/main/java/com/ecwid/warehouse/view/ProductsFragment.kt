@@ -10,7 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ecwid.warehouse.R
-import com.ecwid.warehouse.viewmodel.ProductViewModel
+import com.ecwid.warehouse.viewmodel.ProductsViewModel
 import kotlinx.android.synthetic.main.fragment_products.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -22,7 +22,7 @@ class ProductsFragment : Fragment() ,
         private const val TAG: String = "ProductsFragment"
     }
 
-    private val productsViewModel by viewModel<ProductViewModel>()
+    private val productsViewModel by viewModel<ProductsViewModel>()
 
     private val adapter by lazy {
         RecyclerAdapter(this)

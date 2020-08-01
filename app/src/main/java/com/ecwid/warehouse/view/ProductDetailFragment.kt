@@ -1,6 +1,8 @@
 package com.ecwid.warehouse.view
 
 import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.Intent
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -21,7 +23,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class ProductDetailFragment : Fragment() {
 
 
-
+    private val PICK_IMAGE = 1;
     private val viewModel by viewModel<ProductDetailViewModel>()
 
     override fun onCreateView(
@@ -37,7 +39,7 @@ class ProductDetailFragment : Fragment() {
 
         arguments?.getLong("id")?.let { viewModel.start(it) }
 
-
+        //Если нажали на карточку продукта, то
         viewModel.product.observe(viewLifecycleOwner, Observer { product ->
             if (product != null) {
                 et_product_name?.setText(product.name)
@@ -63,6 +65,15 @@ class ProductDetailFragment : Fragment() {
                         R.id.productsFragment
                     )
                 }
+                iv_product_image.setOnClickListener {
+                    val intent = Intent()
+                    intent.type = "image/*"
+                    intent.action = Intent.ACTION_GET_CONTENT
+                    startActivityForResult(
+                        Intent.createChooser(intent, "Выберете изображение"),
+                        PICK_IMAGE
+                    )
+                }
 
 
             }
@@ -70,7 +81,14 @@ class ProductDetailFragment : Fragment() {
 
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK && requestCode == PICK_IMAGE) {
+            val uri = data?.data
+            iv_product_image.setImageURI(uri)
+        }
 
+    }
 
 
 }

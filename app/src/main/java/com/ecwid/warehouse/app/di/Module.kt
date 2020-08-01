@@ -7,13 +7,13 @@ import com.ecwid.warehouse.model.dao.ProductDao
 import com.ecwid.warehouse.model.repository.ProductRepository
 import com.ecwid.warehouse.viewmodel.AddProductViewModel
 import com.ecwid.warehouse.viewmodel.ProductDetailViewModel
-import com.ecwid.warehouse.viewmodel.ProductViewModel
+import com.ecwid.warehouse.viewmodel.ProductsViewModel
 import org.koin.android.ext.koin.androidApplication
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val viewModelModule = module {
-    viewModel { ProductViewModel(get()) }
+    viewModel { ProductsViewModel(get()) }
     viewModel { AddProductViewModel(get()) }
     viewModel { ProductDetailViewModel(get()) }
 }
