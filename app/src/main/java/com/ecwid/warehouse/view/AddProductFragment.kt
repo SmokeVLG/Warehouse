@@ -14,6 +14,8 @@ import com.ecwid.warehouse.R
 import com.ecwid.warehouse.model.entity.Product
 import com.ecwid.warehouse.viewmodel.AddProductViewModel
 import kotlinx.android.synthetic.main.fragment_add_product.*
+import kotlinx.android.synthetic.main.fragment_add_product.et_product_coast
+import kotlinx.android.synthetic.main.fragment_product_detail.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.io.ByteArrayOutputStream
 
@@ -41,7 +43,8 @@ class AddProductFragment : Fragment() {
                     (addProductViewModel.getMaxId() + 1),
                     et_product_name.text.toString(),
                     getByteArrayFromImage(),
-                    et_product_coast.text.toString().toDouble()
+                    if (et_product_coast.text.toString() != "") et_product_coast.text.toString()
+                        .toDouble() else 0.0
                 )
             )
 
