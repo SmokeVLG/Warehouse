@@ -1,6 +1,7 @@
 package com.ecwid.warehouse.model.repository
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import com.ecwid.warehouse.model.dao.ProductDao
@@ -22,6 +23,10 @@ class ProductRepository(private val productDao: ProductDao) {
 
     fun getProductById(id: Long?): LiveData<Product> {
         return productDao.getProductById(id)
+    }
+
+    fun deleteProduct(id: Long) {
+        productDao.deleteProduct(id)
     }
 
 

@@ -19,4 +19,10 @@ class ProductDetailViewModel  constructor(
     fun start(id: Long) {
         _id.value = id
     }
+
+    fun deleteProduct() {
+        viewModelScope.launch {
+            repository.deleteProduct(_id.value!!)
+        }
+    }
 }

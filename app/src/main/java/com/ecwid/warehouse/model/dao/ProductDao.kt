@@ -1,6 +1,7 @@
 package com.ecwid.warehouse.model.dao
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -22,4 +23,7 @@ interface ProductDao {
 
     @Query("SELECT * FROM products Where id =:id")
     fun getProductById(id: Long?): LiveData<Product>
+
+    @Query("DELETE FROM products Where id =:id")
+    fun deleteProduct(id: Long)
 }

@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.ecwid.warehouse.R
 import com.ecwid.warehouse.viewmodel.ProductDetailViewModel
 import kotlinx.android.synthetic.main.fragment_product_detail.*
@@ -32,9 +33,18 @@ class ProductDetailFragment : Fragment() {
 
 
         viewModel.product.observe(viewLifecycleOwner, Observer {
-            name.text = it.name
-            image.setImageBitmap(BitmapFactory.decodeByteArray(it.image, 0, it.image!!.size))
-            coast.text = it.coast.toString()
+            if (it != null) {
+
+                name.text = it.name
+                image.setImageBitmap(BitmapFactory.decodeByteArray(it.image, 0, it.image!!.size))
+                coast.text = it.coast.toString()
+                delete.setOnClickListener {
+                    viewModel.deleteProduct()
+                    findNavController().navigate(
+                        R.id.productsFragment
+                    )
+                }
+            }
         })
 
     }
