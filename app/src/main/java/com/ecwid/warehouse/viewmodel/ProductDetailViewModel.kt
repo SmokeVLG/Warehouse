@@ -25,4 +25,13 @@ class ProductDetailViewModel  constructor(
             repository.deleteProduct(_id.value!!)
         }
     }
+
+    fun updateProduct(product: Product) {
+
+        viewModelScope.launch {
+            repository.addOrUpdate(product)
+        }
+    }
+
+
 }

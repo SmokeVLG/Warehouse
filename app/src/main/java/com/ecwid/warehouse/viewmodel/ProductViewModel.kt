@@ -8,10 +8,6 @@ import com.ecwid.warehouse.utils.LoadingState
 
 class ProductViewModel(productRepository: ProductRepository) : ViewModel() {
 
-    private val _loadingState = MutableLiveData<LoadingState>()
-    val loadingState: LiveData<LoadingState>
-        get() = _loadingState
-
     val data = productRepository.data
 
   }

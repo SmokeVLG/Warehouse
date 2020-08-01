@@ -1,7 +1,6 @@
 package com.ecwid.warehouse.model.repository
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import com.ecwid.warehouse.model.dao.ProductDao
@@ -11,9 +10,9 @@ class ProductRepository(private val productDao: ProductDao) {
 
     val data = productDao.findAll()
 
-    suspend fun insert(user: Product) {
+    suspend fun addOrUpdate(product: Product) {
         withContext(Dispatchers.IO) {
-            productDao.add(listOf(user))
+            productDao.addOrUpdate(listOf(product))
         }
     }
 
@@ -28,6 +27,5 @@ class ProductRepository(private val productDao: ProductDao) {
     fun deleteProduct(id: Long) {
         productDao.deleteProduct(id)
     }
-
 
 }

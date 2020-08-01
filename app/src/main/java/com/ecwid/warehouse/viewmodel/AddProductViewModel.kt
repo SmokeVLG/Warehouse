@@ -12,12 +12,12 @@ import kotlinx.coroutines.runBlocking
 
 class AddProductViewModel(private val productRepository: ProductRepository) : ViewModel() {
 
-    fun insertUser(product: Product) {
+    fun insertProduct(product: Product) {
 
         viewModelScope.launch {
             try {
                 _loadingState.value = LoadingState.LOADING
-                productRepository.insert(product)
+                productRepository.addOrUpdate(product)
                 _loadingState.value = LoadingState.LOADED
             } catch (e: Exception) {
                 _loadingState.value = LoadingState.error(e.message)

@@ -8,9 +8,7 @@ import androidx.room.PrimaryKey
 data class Product(
     @PrimaryKey val id: Long,
     val name: String,
-    //val avatar_url: ByteArray
-
-    @ColumnInfo(typeAffinity = ColumnInfo.BLOB)
+     @ColumnInfo(typeAffinity = ColumnInfo.BLOB)
     var image: ByteArray? = null,
     val coast: Double
 )

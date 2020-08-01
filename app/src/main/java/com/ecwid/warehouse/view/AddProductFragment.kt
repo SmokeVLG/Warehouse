@@ -1,23 +1,21 @@
 package com.ecwid.warehouse.view
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.graphics.drawable.toBitmap
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.ecwid.warehouse.R
 import com.ecwid.warehouse.model.entity.Product
+import com.ecwid.warehouse.utils.getByteArrayFromImage
 import com.ecwid.warehouse.viewmodel.AddProductViewModel
-import kotlinx.android.synthetic.main.fragment_add_product.*
-import kotlinx.android.synthetic.main.fragment_add_product.et_product_coast
 import kotlinx.android.synthetic.main.fragment_product_detail.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import java.io.ByteArrayOutputStream
 
 
 class AddProductFragment : Fragment() {
@@ -30,19 +28,21 @@ class AddProductFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_add_product, container, false)
+        return inflater.inflate(R.layout.fragment_product_detail, container, false)
     }
 
+    @SuppressLint("RestrictedApi")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        btn_product_delete.visibility = View.GONE
 
         fab_product_save.setOnClickListener {
 
-            addProductViewModel.insertUser(
+            addProductViewModel.insertProduct(
                 Product(
                     (addProductViewModel.getMaxId() + 1),
                     et_product_name.text.toString(),
-                    getByteArrayFromImage(),
+                    getByteArrayFromImage(iv_product_image.drawable.toBitmap()),
                     if (et_product_coast.text.toString() != "") et_product_coast.text.toString()
                         .toDouble() else 0.0
                 )
@@ -63,12 +63,7 @@ class AddProductFragment : Fragment() {
         }
     }
 
-    private fun getByteArrayFromImage(): ByteArray? {
-        val bitmap = (iv_product_image.drawable as BitmapDrawable).bitmap
-        val baos = ByteArrayOutputStream()
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
-        return baos.toByteArray()
-    }
+
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)

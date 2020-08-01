@@ -1,7 +1,6 @@
 package com.ecwid.warehouse.model.dao
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -15,7 +14,7 @@ interface ProductDao {
     fun findAll(): LiveData<List<Product>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun add(products: List<Product>)
+    fun addOrUpdate(products: List<Product>)
 
     @Query("SELECT max(id) FROM products")
     fun getMaxId(): Long
