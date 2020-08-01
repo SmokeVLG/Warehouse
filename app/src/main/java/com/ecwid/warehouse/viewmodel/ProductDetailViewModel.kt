@@ -3,6 +3,7 @@ package com.ecwid.warehouse.viewmodel
 import androidx.lifecycle.*
 import com.ecwid.warehouse.model.entity.Product
 import com.ecwid.warehouse.model.repository.ProductRepository
+import com.ecwid.warehouse.utils.LoadingState
 import kotlinx.coroutines.launch
 
 class ProductDetailViewModel  constructor(
@@ -25,4 +26,13 @@ class ProductDetailViewModel  constructor(
             repository.deleteProduct(_id.value!!)
         }
     }
+
+    fun updateProduct(product: Product) {
+
+        viewModelScope.launch {
+            repository.insert(product)
+        }
+    }
+
+
 }

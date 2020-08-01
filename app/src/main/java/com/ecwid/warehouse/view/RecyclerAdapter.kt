@@ -42,7 +42,7 @@ class RecyclerAdapter(private val listener: ProductItemListener) :
             products[position].image!!.size
         )
 
-        holder.itemView.image.setImageBitmap(bitmap)
+        holder.itemView.iv_product_image.setImageBitmap(bitmap)
         holder.itemView.et_product_coast.text = products[position].coast.toString()
 
 
