@@ -1,22 +1,20 @@
 package com.ecwid.warehouse.view
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.os.bundleOf
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ecwid.warehouse.R
 import com.ecwid.warehouse.utils.LoadingState
-import com.ecwid.warehouse.view.RecyclerAdapter
 import com.ecwid.warehouse.viewmodel.ProductViewModel
 import kotlinx.android.synthetic.main.fragment_products.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
-
 
 
 class ProductsFragment : Fragment() ,
@@ -51,12 +49,7 @@ class ProductsFragment : Fragment() ,
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        val inflate = inflater.inflate(R.layout.fragment_products, container, false)
-
-
-
-        return inflate
+        return inflater.inflate(R.layout.fragment_products, container, false)
     }
     private fun subscribeObservers() {
         userViewModel.data.observe(viewLifecycleOwner, Observer { githubproducts ->

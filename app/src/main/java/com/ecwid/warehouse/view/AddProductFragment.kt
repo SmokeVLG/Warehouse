@@ -44,9 +44,9 @@ class AddProductFragment : Fragment() {
 
             var imageInByte: ByteArray?
             imageInByte = null
-            if (choose_image.getDrawable() != null) {
+            if (choose_image.drawable != null) {
 
-                val bitmap = (choose_image.getDrawable() as BitmapDrawable).bitmap
+                val bitmap = (choose_image.drawable as BitmapDrawable).bitmap
                 val baos = ByteArrayOutputStream()
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
                 imageInByte = baos.toByteArray()

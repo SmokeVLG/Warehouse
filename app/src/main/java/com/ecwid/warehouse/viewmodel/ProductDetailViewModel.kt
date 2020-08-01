@@ -1,11 +1,9 @@
 package com.ecwid.warehouse.viewmodel
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.switchMap
+import androidx.lifecycle.*
 import com.ecwid.warehouse.model.entity.Product
 import com.ecwid.warehouse.model.repository.ProductRepository
+import kotlinx.coroutines.launch
 
 class ProductDetailViewModel  constructor(
     private val repository: ProductRepository

@@ -23,10 +23,7 @@ class ProductDetailFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val inflate = inflater.inflate(R.layout.fragment_product_detail, container, false)
-
-
-        return inflate
+        return inflater.inflate(R.layout.fragment_product_detail, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -36,12 +33,8 @@ class ProductDetailFragment : Fragment() {
 
         viewModel.product.observe(viewLifecycleOwner, Observer {
             name.text = it.name
-
-            val image0 = viewModel.product.value!!.image
-            val bmp = BitmapFactory.decodeByteArray(image0, 0, image0!!.size)
-            image.setImageBitmap(bmp)
+            image.setImageBitmap(BitmapFactory.decodeByteArray(it.image, 0, it.image!!.size))
             coast.text = it.coast.toString()
-
         })
 
     }
