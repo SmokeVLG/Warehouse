@@ -40,7 +40,24 @@
             app:layout_constraintHorizontal_bias="0.535"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/choose_image"
-            tools:text="Наименование:" />
+            tools:text="Наименование" />
+
+        <EditText
+            android:id="@+id/coast"
+
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginRight="12dp"
+
+            android:hint="Стоимость"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.535"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/species"
+            tools:text="Стоимость" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_save"

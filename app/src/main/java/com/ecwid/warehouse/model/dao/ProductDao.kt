@@ -8,7 +8,7 @@ import androidx.room.Query
 import com.ecwid.warehouse.model.entity.Product
 
 @Dao
-interface UserDao {
+interface ProductDao {
 
     @Query("SELECT * FROM products")
     fun findAll(): LiveData<List<Product>>

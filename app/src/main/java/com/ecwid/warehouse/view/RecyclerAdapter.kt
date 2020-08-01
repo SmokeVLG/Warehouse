@@ -5,9 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.ecwid.warehouse.databinding.ItemCharacterBinding
+import com.ecwid.warehouse.databinding.ItemProductBinding
 import com.ecwid.warehouse.model.entity.Product
-import kotlinx.android.synthetic.main.item_character.view.*
+import kotlinx.android.synthetic.main.fragment_product_detail.*
+import kotlinx.android.synthetic.main.item_product.view.*
 import java.util.*
 
 
@@ -21,8 +22,8 @@ class RecyclerAdapter(private val listener: ProductItemListener) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val binding: ItemCharacterBinding =
-            ItemCharacterBinding.inflate(
+        val binding: ItemProductBinding =
+            ItemProductBinding.inflate(
                 layoutInflater, parent, false
             )
         return ViewHolder(
@@ -43,7 +44,7 @@ class RecyclerAdapter(private val listener: ProductItemListener) :
         )
 
         holder.itemView.image.setImageBitmap(bitmap)
-
+        holder.itemView.coast.text = products[position].coast.toString()
 
 
     }
@@ -60,7 +61,7 @@ class RecyclerAdapter(private val listener: ProductItemListener) :
      * Inner ViewHolder class
      */
     class ViewHolder(
-        private val binding: ItemCharacterBinding,
+        private val binding: ItemProductBinding,
         private val listener: ProductItemListener
     ) :
         RecyclerView.ViewHolder(binding.root), View.OnClickListener {
@@ -71,7 +72,7 @@ class RecyclerAdapter(private val listener: ProductItemListener) :
         }
         fun bind(product: Product) {
             this.product = product
-            binding.user = product
+            binding.product = product
         }
 
         override fun onClick(v: View?) {

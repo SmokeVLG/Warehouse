@@ -2,9 +2,13 @@ package com.ecwid.warehouse.app.di
 
 import android.app.Application
 import androidx.room.Room
+import com.bumptech.glide.Glide
+import com.bumptech.glide.RequestManager
+import com.bumptech.glide.request.RequestOptions
+import com.ecwid.warehouse.R
 
 import com.ecwid.warehouse.model.AppDatabase
-import com.ecwid.warehouse.model.dao.UserDao
+import com.ecwid.warehouse.model.dao.ProductDao
 import com.ecwid.warehouse.model.repository.ProductRepository
 import com.ecwid.warehouse.viewmodel.AddProductViewModel
 import com.ecwid.warehouse.viewmodel.ProductDetailViewModel
@@ -30,8 +34,8 @@ val databaseModule = module {
             .build()
     }
 
-    fun provideDao(database: AppDatabase): UserDao {
-        return database.userDao
+    fun provideDao(database: AppDatabase): ProductDao {
+        return database.productDao
     }
 
     single { provideDatabase(androidApplication()) }
@@ -39,10 +43,10 @@ val databaseModule = module {
 }
 
 val repositoryModule = module {
-    fun provideUserRepository(dao: UserDao): ProductRepository {
+    fun provideProductRepository(dao: ProductDao): ProductRepository {
         return ProductRepository(dao)
     }
 
-    single { provideUserRepository(get()) }
+    single { provideProductRepository(get()) }
 }
 

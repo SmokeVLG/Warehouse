@@ -11,5 +11,6 @@ data class Product(
     //val avatar_url: ByteArray
 
     @ColumnInfo(typeAffinity = ColumnInfo.BLOB)
-    var image: ByteArray? = null
+    var image: ByteArray? = null,
+    val coast: Double
 )

@@ -42,18 +42,23 @@ class AddProductFragment : Fragment() {
 
             val id = addProductViewModel.getMaxId()
 
+            var imageInByte: ByteArray?
+            imageInByte = null
+            if (choose_image.getDrawable() != null) {
 
-            val bitmap = (choose_image.getDrawable() as BitmapDrawable).bitmap
-            val baos = ByteArrayOutputStream()
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
-            val imageInByte = baos.toByteArray()
+                val bitmap = (choose_image.getDrawable() as BitmapDrawable).bitmap
+                val baos = ByteArrayOutputStream()
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+                imageInByte = baos.toByteArray()
+            }
 
 
             val product =
                 Product(
                     (id + 1),
                     species.text.toString(),
-                    imageInByte
+                    imageInByte,
+                    coast.text.toString().toDouble()
                 )
 
             addProductViewModel.insertUser(product)
@@ -70,7 +75,7 @@ class AddProductFragment : Fragment() {
             val intent = Intent()
             intent.type = "image/*"
             intent.action = Intent.ACTION_GET_CONTENT
-            startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE)
+            startActivityForResult(Intent.createChooser(intent, "Выберете изображение"), PICK_IMAGE)
 
         }
     }
