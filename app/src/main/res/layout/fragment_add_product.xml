@@ -13,7 +13,7 @@
         android:textAlignment="textEnd">
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/choose_image"
+            android:id="@+id/iv_product_image"
             android:layout_width="200dp"
             android:layout_height="200dp"
             android:layout_marginTop="16dp"
@@ -26,7 +26,7 @@
 
 
         <EditText
-            android:id="@+id/species"
+            android:id="@+id/et_product_name"
 
             android:layout_width="200dp"
             android:layout_height="wrap_content"
@@ -34,16 +34,18 @@
             android:layout_marginTop="36dp"
             android:layout_marginRight="12dp"
 
-            android:hint="Наименование"
+            android:hint="@string/product_name_text"
             android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.535"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/choose_image"
-            tools:text="Наименование" />
+            app:layout_constraintTop_toBottomOf="@+id/iv_product_image"
+            tools:text="@string/product_name_text"
+            android:importantForAutofill="no"
+            android:inputType="text" />
 
         <EditText
-            android:id="@+id/coast"
+            android:id="@+id/et_product_coast"
 
             android:layout_width="200dp"
             android:layout_height="wrap_content"
@@ -51,16 +53,18 @@
             android:layout_marginTop="24dp"
             android:layout_marginRight="12dp"
 
-            android:hint="Стоимость"
+            android:hint="@string/product_coast_name"
             android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.535"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/species"
-            tools:text="Стоимость" />
+            app:layout_constraintTop_toBottomOf="@+id/et_product_name"
+            tools:text="@string/product_coast_name"
+            android:importantForAutofill="no"
+            android:inputType="numberDecimal" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab_save"
+            android:id="@+id/fab_product_save"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:tint="@android:color/white"

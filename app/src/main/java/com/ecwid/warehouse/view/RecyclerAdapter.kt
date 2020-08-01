@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ecwid.warehouse.databinding.ItemProductBinding
 import com.ecwid.warehouse.model.entity.Product
-import kotlinx.android.synthetic.main.fragment_product_detail.*
 import kotlinx.android.synthetic.main.item_product.view.*
 import java.util.*
 
@@ -44,7 +43,7 @@ class RecyclerAdapter(private val listener: ProductItemListener) :
         )
 
         holder.itemView.image.setImageBitmap(bitmap)
-        holder.itemView.coast.text = products[position].coast.toString()
+        holder.itemView.et_product_coast.text = products[position].coast.toString()
 
 
     }

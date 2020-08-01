@@ -32,13 +32,13 @@ class ProductDetailFragment : Fragment() {
         arguments?.getLong("id")?.let { viewModel.start(it) }
 
 
-        viewModel.product.observe(viewLifecycleOwner, Observer {
-            if (it != null) {
+        viewModel.product.observe(viewLifecycleOwner, Observer { product ->
+            if (product != null) {
 
-                name.text = it.name
-                image.setImageBitmap(BitmapFactory.decodeByteArray(it.image, 0, it.image!!.size))
-                coast.text = it.coast.toString()
-                delete.setOnClickListener {
+                name.text = product.name
+                image.setImageBitmap(BitmapFactory.decodeByteArray(product.image, 0, product.image!!.size))
+                et_product_coast.text = product.coast.toString()
+                btn_product_delete.setOnClickListener {
                     viewModel.deleteProduct()
                     findNavController().navigate(
                         R.id.productsFragment

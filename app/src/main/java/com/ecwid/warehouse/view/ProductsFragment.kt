@@ -24,7 +24,7 @@ class ProductsFragment : Fragment() ,
         private const val TAG: String = "ProductsFragment"
     }
 
-    private val userViewModel by viewModel<ProductViewModel>()
+    private val productsViewModel by viewModel<ProductViewModel>()
 
     private val adapter by lazy {
         RecyclerAdapter(this)
@@ -42,7 +42,6 @@ class ProductsFragment : Fragment() ,
             )
 
         }
-
     }
 
     override fun onCreateView(
@@ -52,12 +51,12 @@ class ProductsFragment : Fragment() ,
         return inflater.inflate(R.layout.fragment_products, container, false)
     }
     private fun subscribeObservers() {
-        userViewModel.data.observe(viewLifecycleOwner, Observer { githubproducts ->
-            adapter.setProducts(githubproducts)
+        productsViewModel.data.observe(viewLifecycleOwner, Observer { products ->
+            adapter.setProducts(products)
             adapter.notifyDataSetChanged()
         })
 
-        userViewModel.loadingState.observe(viewLifecycleOwner, Observer {
+        productsViewModel.loadingState.observe(viewLifecycleOwner, Observer {
             when (it.status) {
                 LoadingState.Status.FAILED -> Toast.makeText(
                     activity,
