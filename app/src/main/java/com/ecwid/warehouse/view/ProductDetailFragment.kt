@@ -37,7 +37,7 @@ class ProductDetailFragment : Fragment() {
 
                 name.text = it.name
                 image.setImageBitmap(BitmapFactory.decodeByteArray(it.image, 0, it.image!!.size))
-                coast.text = it.coast.toString()
+                et_product_coast.text = it.coast.toString()
                 delete.setOnClickListener {
                     viewModel.deleteProduct()
                     findNavController().navigate(

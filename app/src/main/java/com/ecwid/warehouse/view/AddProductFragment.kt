@@ -16,14 +16,11 @@ import com.ecwid.warehouse.viewmodel.AddProductViewModel
 import kotlinx.android.synthetic.main.fragment_add_product.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.io.ByteArrayOutputStream
-import java.io.IOException
-import java.io.InputStream
 
 
 class AddProductFragment : Fragment() {
 
     private val PICK_IMAGE = 1;
-    private lateinit var byteArray: ByteArray
     private val addProductViewModel by viewModel<AddProductViewModel>()
 
 
@@ -31,37 +28,22 @@ class AddProductFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_add_product, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        fab_save.setOnClickListener {
+        fab_product_save.setOnClickListener {
 
-            val id = addProductViewModel.getMaxId()
-
-            var imageInByte: ByteArray?
-            imageInByte = null
-            if (choose_image.drawable != null) {
-
-                val bitmap = (choose_image.drawable as BitmapDrawable).bitmap
-                val baos = ByteArrayOutputStream()
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
-                imageInByte = baos.toByteArray()
-            }
-
-
-            val product =
+            addProductViewModel.insertUser(
                 Product(
-                    (id + 1),
-                    species.text.toString(),
-                    imageInByte,
-                    coast.text.toString().toDouble()
+                    (addProductViewModel.getMaxId() + 1),
+                    et_product_name.text.toString(),
+                    getByteArrayFromImage(),
+                    et_product_coast.text.toString().toDouble()
                 )
-
-            addProductViewModel.insertUser(product)
+            )
 
             findNavController().navigate(
                 R.id.productsFragment
@@ -69,9 +51,7 @@ class AddProductFragment : Fragment() {
 
         }
 
-
-        choose_image.setOnClickListener {
-
+        iv_product_image.setOnClickListener {
             val intent = Intent()
             intent.type = "image/*"
             intent.action = Intent.ACTION_GET_CONTENT
@@ -80,28 +60,20 @@ class AddProductFragment : Fragment() {
         }
     }
 
+    private fun getByteArrayFromImage(): ByteArray? {
+        val bitmap = (iv_product_image.drawable as BitmapDrawable).bitmap
+        val baos = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+        return baos.toByteArray()
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK && requestCode == PICK_IMAGE) {
             val uri = data?.data
-            val iStream: InputStream? = requireActivity().contentResolver.openInputStream(uri!!)
-            byteArray = this.getBytes(iStream!!)!!
-            choose_image.setImageURI(uri)
-
+            iv_product_image.setImageURI(uri)
         }
 
-    }
-
-    @Throws(IOException::class)
-    fun getBytes(inputStream: InputStream): ByteArray? {
-        val byteBuffer = ByteArrayOutputStream()
-        val bufferSize = 1024
-        val buffer = ByteArray(bufferSize)
-        var len: Int
-        while (inputStream.read(buffer).also { len = it } != -1) {
-            byteBuffer.write(buffer, 0, len)
-        }
-        return byteBuffer.toByteArray()
     }
 
 }

@@ -36,7 +36,7 @@
 
 
         <TextView
-            android:id="@+id/coast"
+            android:id="@+id/et_product_coast"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -56,7 +56,7 @@
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/coast" />
+            app:layout_constraintTop_toBottomOf="@id/et_product_coast" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
